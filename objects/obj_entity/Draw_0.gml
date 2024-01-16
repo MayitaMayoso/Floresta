@@ -1,0 +1,4 @@
+
+y -= z*PERSPECTIVE_FACTOR;
+draw_self();
+y += z*PERSPECTIVE_FACTOR;
