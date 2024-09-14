@@ -1,2 +1,0 @@
-
-menu.Draw(x, y);

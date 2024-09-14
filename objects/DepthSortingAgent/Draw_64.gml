@@ -1,1 +1,0 @@
-DepthSorting.DrawGUICallback(layer);

@@ -1,2 +1,0 @@
-
-DepthSorting.DrawEndCallback(layer);

@@ -1,1 +1,0 @@
-image_index = instance_exists(owner) && wielded && owner.object_index!=obj_turret;

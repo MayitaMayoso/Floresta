@@ -1,3 +1,0 @@
-
-fsm.StepEvent();
-
