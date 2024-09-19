@@ -1,10 +1,15 @@
 project(Floresta)
 
 add_executable(${PROJECT_NAME})
+add_library(Game STATIC)
 
-target_sources(${PROJECT_NAME} PRIVATE
-		main.cpp
-)
+set(TARGETS ${PROJECT_NAME} Game)
+
+foreach (TARGET IN LISTS TARGETS)
+	target_sources(${TARGET} PRIVATE
+			main.cpp
+	)
+endforeach ()
 
 target_include_directories(${PROJECT_NAME} PUBLIC
 		${CMAKE_CURRENT_SOURCE_DIR}
