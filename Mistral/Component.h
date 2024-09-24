@@ -17,6 +17,12 @@ class Component
 
 	std::vector<Component*>& GetChildren();
 
+	Component* GetChild(const std::string& childId);
+
+	void SetPosition(raylib::Vector3 position);
+
+	raylib::Vector3 GetPosition();
+
 	// Events
 	virtual void CreateEvent() {};
 

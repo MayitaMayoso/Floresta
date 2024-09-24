@@ -1,7 +1,9 @@
 #ifndef MISTRAL_H
 #define MISTRAL_H
 
-#include "raylib-cpp.hpp"
+#include <raylib-cpp.hpp>
+
+#include "Component.h"
 
 class Mistral
 {
@@ -21,7 +23,7 @@ class Mistral
 
 	raylib::Window mWindow;
 	Color mClearColor = RAYWHITE;
-	raylib::Vector2 mPosition;
+	std::vector<Component> mComponents;
 };
 
 #endif // MISTRAL_H

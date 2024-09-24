@@ -2,7 +2,7 @@
 
 int main()
 {
-	Mistral florestaGame("Floresta", raylib::Vector2(1920.f, 1080.f));
+	Mistral florestaGame("Floresta", raylib::Vector2(1280, 720));
 
 	florestaGame.Start();
 
