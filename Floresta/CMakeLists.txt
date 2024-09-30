@@ -17,3 +17,12 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC raylib raylib_cpp Mistral)
+
+
+set(OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/resources")
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_SOURCE_DIR}/Floresta/resources
+    ${OUTPUT_DIRECTORY}
+)

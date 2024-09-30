@@ -5,12 +5,6 @@ add_library(${PROJECT_NAME} STATIC)
 target_sources(${PROJECT_NAME} PRIVATE
 		Mistral.h
 		Mistral.cpp
-		Component.h
-		Component.cpp
-		ResourcesManager.h
-		ResourcesManager.cpp
-		InputManager.h
-		InputManager.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
@@ -18,3 +12,6 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC raylib raylib_cpp)
+
+add_subdirectory(Components)
+add_subdirectory(Managers)

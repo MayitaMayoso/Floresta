@@ -1,17 +1,20 @@
-#ifndef FLORESTAPROJECT_COMPONENT_H
-#define FLORESTAPROJECT_COMPONENT_H
+#ifndef COMPONENT_H
+#define COMPONENT_H
 
+#include <raylib-cpp.hpp>
 #include <string>
 #include <vector>
-
-#include "raylib-cpp.hpp"
 
 class Component
 {
   public:
 
+	Component();
+
+	Component(const std::string& Type);
+
 	// Getters
-	std::string GetId();
+	std::string GetId() const;
 
 	Component* GetParent();
 
@@ -36,7 +39,7 @@ class Component
 
 	virtual void RenderScreenEvent() {};
 
-  private:
+  protected:
 
 	std::string mId;
 	Component* mParent;
@@ -44,4 +47,4 @@ class Component
 	raylib::Vector3 mPosition;
 };
 
-#endif // FLORESTAPROJECT_COMPONENT_H
+#endif // COMPONENT_H

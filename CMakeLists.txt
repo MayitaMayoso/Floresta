@@ -29,6 +29,7 @@ if (NOT raylib_cpp_FOUND)
 	FetchContent_MakeAvailable(raylib_cpp)
 endif ()
 
+
 # Project subdirectories
 add_subdirectory(Mistral)
 add_subdirectory(Floresta)

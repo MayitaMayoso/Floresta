@@ -3,13 +3,21 @@
 
 #include <raylib-cpp.hpp>
 
-#include "Component.h"
+#include "Managers/ComponentsManager.h"
+#include "Managers/InputManager.h"
+#include "Managers/ResourcesManager.h"
+
+using Vec2 = raylib::Vector2;
+using Vec3 = raylib::Vector3;
+using Vec4 = raylib::Vector4;
+using Mat = raylib::Matrix;
+using Quat = raylib::Quaternion;
 
 class Mistral
 {
   public:
 
-	Mistral(const std::string& applicationName, raylib::Vector2 screenSize);
+	Mistral(const std::string& applicationName, const Vec2& screenSize);
 
 	~Mistral();
 
@@ -21,9 +29,14 @@ class Mistral
 
 	void RenderEvent();
 
+	// Rendering
 	raylib::Window mWindow;
 	Color mClearColor = RAYWHITE;
-	std::vector<Component> mComponents;
+
+	// Management
+	ComponentsManager mComponentManager;
+	ResourcesManager mResourcesManager;
+	InputManager mInputManager;
 };
 
 #endif // MISTRAL_H
