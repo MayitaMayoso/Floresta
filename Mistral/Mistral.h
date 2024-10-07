@@ -1,11 +1,10 @@
 #ifndef MISTRAL_H
 #define MISTRAL_H
 
-#include <raylib-cpp.hpp>
-
 #include "Managers/ComponentsManager.h"
 #include "Managers/InputManager.h"
 #include "Managers/ResourcesManager.h"
+#include "raylib-cpp.hpp"
 
 using Vec2 = raylib::Vector2;
 using Vec3 = raylib::Vector3;
@@ -23,6 +22,11 @@ class Mistral
 
 	void Start();
 
+	// Management
+	static inline ComponentsManager Components;
+	static inline ResourcesManager Resources;
+	static inline InputManager Input;
+
   private:
 
 	void UpdateEvent();
@@ -32,11 +36,6 @@ class Mistral
 	// Rendering
 	raylib::Window mWindow;
 	Color mClearColor = RAYWHITE;
-
-	// Management
-	ComponentsManager mComponentManager;
-	ResourcesManager mResourcesManager;
-	InputManager mInputManager;
 };
 
 #endif // MISTRAL_H

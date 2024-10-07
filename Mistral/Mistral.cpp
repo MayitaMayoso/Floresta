@@ -16,7 +16,7 @@ Mistral::~Mistral()
 
 void Mistral::Start()
 {
-	mComponentManager.RegisterComponent(std::make_shared<ComponentSprite>());
+	Components.RegisterComponent(std::make_shared<ComponentSprite>());
 
 	while (!mWindow.ShouldClose())
 	{
@@ -28,11 +28,11 @@ void Mistral::Start()
 
 void Mistral::UpdateEvent()
 {
-	mComponentManager.CreateEventCallback();
+	Components.CreateEventCallback();
 
-	mComponentManager.DestroyEventCallback();
+	Components.DestroyEventCallback();
 
-	mComponentManager.UpdateEventCallback();
+	Components.UpdateEventCallback();
 }
 
 void Mistral::RenderEvent()
@@ -41,9 +41,9 @@ void Mistral::RenderEvent()
 
 	ClearBackground(mClearColor);
 
-	mComponentManager.RenderEventCallback();
+	Components.RenderEventCallback();
 
-	mComponentManager.RenderScreenEventCallback();
+	Components.RenderScreenEventCallback();
 
 	EndDrawing();
 }

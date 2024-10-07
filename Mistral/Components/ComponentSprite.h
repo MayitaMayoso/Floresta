@@ -16,8 +16,6 @@ class ComponentSprite : public Component
 
   private:
 
-	raylib::Texture2D mTexture;
-
 	Vec2 mSpeed;
 };
 

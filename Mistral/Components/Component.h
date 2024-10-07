@@ -1,9 +1,10 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-#include <raylib-cpp.hpp>
 #include <string>
 #include <vector>
+
+#include "raylib-cpp.hpp"
 
 class Component
 {

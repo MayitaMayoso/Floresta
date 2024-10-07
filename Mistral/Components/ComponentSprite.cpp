@@ -2,9 +2,10 @@
 
 #include <iostream>
 
+#include "Mistral.h"
+
 void ComponentSprite::CreateEvent()
 {
-	mTexture = raylib::Texture("resources/pikachu.png");
 }
 
 void ComponentSprite::UpdateEvent()
@@ -19,5 +20,5 @@ void ComponentSprite::UpdateEvent()
 
 void ComponentSprite::RenderEvent()
 {
-	mTexture.Draw(mPosition.x, mPosition.y);
+	Mistral::Resources.GetResource("resources/pikachu.png").Draw(mPosition.x, mPosition.y);
 }
