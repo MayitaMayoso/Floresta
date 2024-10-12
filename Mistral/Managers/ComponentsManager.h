@@ -11,11 +11,11 @@ class ComponentsManager
   public:
 
 	// Components management
-	void RegisterComponent(std::shared_ptr<Component> component);
+	void Create(std::shared_ptr<Component> component);
 
-	void UnregisterComponent(std::shared_ptr<const Component> component);
+	void Destroy(std::shared_ptr<const Component> component);
 
-	void UnregisterComponent(const std::string& componentId);
+	void Destroy(const std::string& componentId);
 
 	// Event callbacks
 	void CreateEventCallback();

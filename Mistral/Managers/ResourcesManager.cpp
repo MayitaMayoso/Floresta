@@ -3,32 +3,42 @@
 #include <iostream>
 
 #include "raylib-cpp.hpp"
+#include "Resources/ResourceTexture.h"
 
-bool ResourcesManager::LoadResource(const std::filesystem::path& Path)
+bool ResourcesManager::Load(const std::filesystem::path& Path)
 {
-	raylib::Texture NewResource(Path.string());
+	bool Ready = false;
 
-	if (!NewResource.IsReady())
+	if (Path.extension() == ".jpg" || Path.extension() == ".png")
+	{
+		auto Texture = std::make_shared<ResourceTexture>(Path);
+		if (Texture->Get().IsReady())
+		{
+			mResources.try_emplace(Path, Texture);
+			Ready = true;
+		}
+	}
+
+	if (!Ready)
 	{
 		std::cout << "Could not load the resource: " << Path.filename() << std::endl;
 		return false;
 	}
 
-	mResources.try_emplace(Path, Path.string());
 	return true;
 }
 
-bool ResourcesManager::UnloadResource(const std::filesystem::path& Path)
+bool ResourcesManager::Unload(const std::filesystem::path& Path)
 {
 	mResources.erase(Path);
 	return true;
 }
 
-const raylib::Texture& ResourcesManager::GetResource(const std::filesystem::path& Path)
+std::shared_ptr<Resource> ResourcesManager::Get(const std::filesystem::path& Path)
 {
 	if (mResources.find(Path) == mResources.cend())
 	{
-		bool Status = LoadResource(Path);
+		bool Status = Load(Path);
 
 		if (!Status)
 		{

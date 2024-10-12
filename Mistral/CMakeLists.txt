@@ -15,3 +15,4 @@ target_link_libraries(${PROJECT_NAME} PUBLIC raylib raylib_cpp)
 
 add_subdirectory(Components)
 add_subdirectory(Managers)
+add_subdirectory(Resources)

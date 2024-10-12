@@ -2,18 +2,18 @@
 
 #include <iostream>
 
-void ComponentsManager::RegisterComponent(std::shared_ptr<Component> component)
+void ComponentsManager::Create(std::shared_ptr<Component> component)
 {
 	mComponents.try_emplace(component->GetId(), component);
 	mCreateList.emplace_back(component->GetId());
 }
 
-void ComponentsManager::UnregisterComponent(std::shared_ptr<const Component> component)
+void ComponentsManager::Destroy(std::shared_ptr<const Component> component)
 {
 	mDestroyList.emplace_back(component->GetId());
 }
 
-void ComponentsManager::UnregisterComponent(const std::string& componentId)
+void ComponentsManager::Destroy(const std::string& componentId)
 {
 	mDestroyList.emplace_back(componentId);
 }

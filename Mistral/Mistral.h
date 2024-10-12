@@ -34,7 +34,8 @@ class Mistral
 	void RenderEvent();
 
 	// Rendering
-	raylib::Window mWindow;
+	std::string mApplicationName;
+	Vec2 mScreenSize;
 	Color mClearColor = RAYWHITE;
 };
 

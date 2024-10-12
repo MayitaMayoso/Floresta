@@ -5,8 +5,10 @@
 #include "Components/ComponentSprite.h"
 
 Mistral::Mistral(const std::string& applicationName, const Vec2& screenSize):
-	mWindow(static_cast<int>(screenSize.x), static_cast<int>(screenSize.y), applicationName)
+	mApplicationName(applicationName),
+	mScreenSize(screenSize)
 {
+	SetTraceLogLevel(TraceLogLevel::LOG_NONE);
 	SetTargetFPS(165);
 }
 
@@ -16,14 +18,18 @@ Mistral::~Mistral()
 
 void Mistral::Start()
 {
-	Components.RegisterComponent(std::make_shared<ComponentSprite>());
+	raylib::Window window(static_cast<int>(mScreenSize.x), static_cast<int>(mScreenSize.y), mApplicationName);
 
-	while (!mWindow.ShouldClose())
+	Components.Create(std::make_shared<ComponentSprite>());
+
+	while (!window.ShouldClose())
 	{
 		UpdateEvent();
 
 		RenderEvent();
 	}
+
+	window.Close();
 }
 
 void Mistral::UpdateEvent()

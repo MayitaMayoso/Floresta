@@ -1,19 +1,24 @@
-#ifndef RESOURCES_H
-#define RESOURCES_H
+#ifndef RESOURCE_H
+#define RESOURCE_H
 
 #include <filesystem>
 #include <memory>
 
-class Resources
+class Resource
 {
   public:
 
+	virtual bool Load() = 0;
+
+	virtual bool Unload() = 0;
+
+	std::filesystem::path GetPath();
+
+	void SetPath(const std::filesystem::path& Path);
+
   private:
 
-	// std::shared_ptr<T> mData = nullptr;
 	std::filesystem::path mPath;
-	bool mLoaded = false;
-	uint32_t mUseCount = 0u;
 };
 
-#endif // RESOURCES_H
+#endif // RESOURCE_H

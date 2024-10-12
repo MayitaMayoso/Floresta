@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "Mistral.h"
+#include "Resources/ResourceTexture.h"
 
 void ComponentSprite::CreateEvent()
 {
@@ -20,5 +21,6 @@ void ComponentSprite::UpdateEvent()
 
 void ComponentSprite::RenderEvent()
 {
-	Mistral::Resources.GetResource("resources/pikachu.png").Draw(mPosition.x, mPosition.y);
+	auto Sprite = Mistral::Resources.Get<ResourceTexture>("resources/pikachu.png");
+	Sprite->Get().Draw(mPosition.x, mPosition.y);
 }
