@@ -1,10 +1,15 @@
 #include "Mistral.h"
 
-#include <iostream>
-
 #include "Components/ComponentSprite.h"
+#include "Managers/ComponentsManager.h"
 
-Mistral::Mistral(const std::string& applicationName, const Vec2& screenSize):
+void Mistral::StartApplication(const std::string& applicationName, const Vec2& screenSize)
+{
+	Application app("test", Vec2(1920.f, 1080.f));
+	app.Start();
+}
+
+Mistral::Application::Application(const std::string& applicationName, const Vec2& screenSize):
 	mApplicationName(applicationName),
 	mScreenSize(screenSize)
 {
@@ -12,15 +17,15 @@ Mistral::Mistral(const std::string& applicationName, const Vec2& screenSize):
 	SetTargetFPS(165);
 }
 
-Mistral::~Mistral()
+Mistral::Application::~Application()
 {
 }
 
-void Mistral::Start()
+void Mistral::Application::Start()
 {
 	raylib::Window window(static_cast<int>(mScreenSize.x), static_cast<int>(mScreenSize.y), mApplicationName);
 
-	Components.Create(std::make_shared<ComponentSprite>());
+	Components::Create(std::make_shared<ComponentSprite>());
 
 	while (!window.ShouldClose())
 	{
@@ -32,24 +37,24 @@ void Mistral::Start()
 	window.Close();
 }
 
-void Mistral::UpdateEvent()
+void Mistral::Application::UpdateEvent()
 {
-	Components.CreateEventCallback();
+	Components::CreateEventCallback();
 
-	Components.DestroyEventCallback();
+	Components::DestroyEventCallback();
 
-	Components.UpdateEventCallback();
+	Components::UpdateEventCallback();
 }
 
-void Mistral::RenderEvent()
+void Mistral::Application::RenderEvent()
 {
 	BeginDrawing();
 
 	ClearBackground(mClearColor);
 
-	Components.RenderEventCallback();
+	Components::RenderEventCallback();
 
-	Components.RenderScreenEventCallback();
+	Components::RenderScreenEventCallback();
 
 	EndDrawing();
 }

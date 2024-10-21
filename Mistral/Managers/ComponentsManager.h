@@ -1,15 +1,12 @@
-#ifndef COMPONENTS_MANAGER_H
-#define COMPONENTS_MANAGER_H
+#pragma once
 
 #include <map>
 #include <memory>
 
 #include "Components/Component.h"
 
-class ComponentsManager
+namespace Mistral::Components
 {
-  public:
-
 	// Components management
 	void Create(std::shared_ptr<Component> component);
 
@@ -29,12 +26,4 @@ class ComponentsManager
 	void RenderEventCallback();
 
 	void RenderScreenEventCallback();
-
-  private:
-
-	std::map<std::string, std::shared_ptr<Component>, std::less<>> mComponents;
-	std::vector<std::string> mCreateList;
-	std::vector<std::string> mDestroyList;
 };
-
-#endif // COMPONENTS_MANAGER_H

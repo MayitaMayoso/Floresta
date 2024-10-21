@@ -1,42 +1,33 @@
-#ifndef RESOURCES_MANAGER_H
-#define RESOURCES_MANAGER_H
+#pragma once
 
 #include <filesystem>
 #include <iostream>
 #include <map>
 
+#include "Mistral.h"
 #include "raylib-cpp.hpp"
-#include "Resources/Resource.h"
 
-class ResourcesManager
+namespace Mistral::Resources
 {
-  public:
-
-	bool Load(const std::filesystem::path& Path);
-
-	bool Unload(const std::filesystem::path& Path);
-
-	std::shared_ptr<Resource> Get(const std::filesystem::path& Path);
-
-	template <typename Type>
-	std::shared_ptr<Type> Get(const std::filesystem::path& Path)
+	union Type
 	{
-		if (mResources.find(Path) == mResources.cend())
-		{
-			bool Status = Load(Path);
+		Texture texture;
+		Sound sound;
+		Model model;
+		Font font;
+	};
 
-			if (!Status)
-			{
-				std::cout << "Could not get the resource: " << Path.filename() << std::endl;
-			}
-		}
+	bool Load(const std::filesystem::path& path);
 
-		return std::static_pointer_cast<Type>(mResources.at(Path));
-	}
+	bool Unload(const std::filesystem::path& path);
 
-  private:
+	Type& Get(const std::filesystem::path& path);
 
-	std::map<std::filesystem::path, std::shared_ptr<Resource>, std::less<>> mResources;
-};
+	Texture& GetTexture(const std::filesystem::path& path);
 
-#endif // RESOURCES_MANAGER_H
+	Sound& GetSound(const std::filesystem::path& path);
+
+	Model& GetModel(const std::filesystem::path& path);
+
+	Font& GetFont(const std::filesystem::path& path);
+}

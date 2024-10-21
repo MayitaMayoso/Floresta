@@ -1,24 +1,28 @@
 #include "ComponentsManager.h"
 
-#include <iostream>
+#include "Components/Component.h"
 
-void ComponentsManager::Create(std::shared_ptr<Component> component)
+static std::map<std::string, std::shared_ptr<Mistral::Component>, std::less<>> mComponents;
+static std::vector<std::string> mCreateList;
+static std::vector<std::string> mDestroyList;
+
+void Mistral::Components::Create(std::shared_ptr<Component> component)
 {
 	mComponents.try_emplace(component->GetId(), component);
 	mCreateList.emplace_back(component->GetId());
 }
 
-void ComponentsManager::Destroy(std::shared_ptr<const Component> component)
+void Mistral::Components::Destroy(std::shared_ptr<const Component> component)
 {
 	mDestroyList.emplace_back(component->GetId());
 }
 
-void ComponentsManager::Destroy(const std::string& componentId)
+void Mistral::Components::Destroy(const std::string& componentId)
 {
 	mDestroyList.emplace_back(componentId);
 }
 
-void ComponentsManager::CreateEventCallback()
+void Mistral::Components::CreateEventCallback()
 {
 	for (const auto& componentId : mCreateList)
 	{
@@ -27,7 +31,7 @@ void ComponentsManager::CreateEventCallback()
 	mCreateList.clear();
 };
 
-void ComponentsManager::DestroyEventCallback()
+void Mistral::Components::DestroyEventCallback()
 {
 	for (const auto& componentId : mDestroyList)
 	{
@@ -36,7 +40,7 @@ void ComponentsManager::DestroyEventCallback()
 	mDestroyList.clear();
 };
 
-void ComponentsManager::UpdateEventCallback()
+void Mistral::Components::UpdateEventCallback()
 {
 	for (auto& [id, component] : mComponents)
 	{
@@ -44,7 +48,7 @@ void ComponentsManager::UpdateEventCallback()
 	}
 };
 
-void ComponentsManager::FixedUpdateEventCallback()
+void Mistral::Components::FixedUpdateEventCallback()
 {
 	for (auto& [id, component] : mComponents)
 	{
@@ -52,7 +56,7 @@ void ComponentsManager::FixedUpdateEventCallback()
 	}
 };
 
-void ComponentsManager::RenderEventCallback()
+void Mistral::Components::RenderEventCallback()
 {
 	for (auto& [id, component] : mComponents)
 	{
@@ -60,7 +64,7 @@ void ComponentsManager::RenderEventCallback()
 	}
 };
 
-void ComponentsManager::RenderScreenEventCallback()
+void Mistral::Components::RenderScreenEventCallback()
 {
 	for (auto& [id, component] : mComponents)
 	{

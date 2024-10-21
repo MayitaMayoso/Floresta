@@ -45,27 +45,27 @@ namespace uuid
 	}
 } // namespace uuid
 
-Component::Component():
+Mistral::Component::Component():
 	mId(uuid::generate_uuid_v4())
 {
 }
 
-std::string Component::GetId() const
+std::string Mistral::Component::GetId() const
 {
 	return mId;
 }
 
-Component* Component::GetParent()
+Mistral::Component* Mistral::Component::GetParent()
 {
 	return mParent;
 }
 
-std::vector<Component*>& Component::GetChildren()
+std::vector<Mistral::Component*>& Mistral::Component::GetChildren()
 {
 	return mChildren;
 }
 
-Component* Component::GetChild(const std::string& childId)
+Mistral::Component* Mistral::Component::GetChild(const std::string& childId)
 {
 	for (auto child : mChildren)
 	{
@@ -77,12 +77,12 @@ Component* Component::GetChild(const std::string& childId)
 	return nullptr;
 }
 
-void Component::SetPosition(raylib::Vector3 position)
+void Mistral::Component::SetPosition(Vec3 position)
 {
 	mPosition = position;
 }
 
-raylib::Vector3 Component::GetPosition()
+Vec3 Mistral::Component::GetPosition()
 {
 	return mPosition;
 }

@@ -1,10 +1,9 @@
-#ifndef COMPONENT_SPRITE_H
-#define COMPONENT_SPRITE_H
+#pragma once
 
 #include "Component.h"
 #include "Mistral.h"
 
-class ComponentSprite : public Component
+class ComponentSprite : public Mistral::Component
 {
   public:
 
@@ -18,5 +17,3 @@ class ComponentSprite : public Component
 
 	Vec2 mSpeed;
 };
-
-#endif

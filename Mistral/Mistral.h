@@ -1,9 +1,5 @@
-#ifndef MISTRAL_H
-#define MISTRAL_H
+#pragma once
 
-#include "Managers/ComponentsManager.h"
-#include "Managers/InputManager.h"
-#include "Managers/ResourcesManager.h"
 #include "raylib-cpp.hpp"
 
 using Vec2 = raylib::Vector2;
@@ -12,31 +8,29 @@ using Vec4 = raylib::Vector4;
 using Mat = raylib::Matrix;
 using Quat = raylib::Quaternion;
 
-class Mistral
+namespace Mistral
 {
-  public:
+	void StartApplication(const std::string& applicationName, const Vec2& screenSize);
 
-	Mistral(const std::string& applicationName, const Vec2& screenSize);
+	class Application
+	{
+	  public:
 
-	~Mistral();
+		Application(const std::string& applicationName, const Vec2& screenSize);
 
-	void Start();
+		~Application();
 
-	// Management
-	static inline ComponentsManager Components;
-	static inline ResourcesManager Resources;
-	static inline InputManager Input;
+		void Start();
 
-  private:
+	  private:
 
-	void UpdateEvent();
+		void UpdateEvent();
 
-	void RenderEvent();
+		void RenderEvent();
 
-	// Rendering
-	std::string mApplicationName;
-	Vec2 mScreenSize;
-	Color mClearColor = RAYWHITE;
-};
-
-#endif // MISTRAL_H
+		// Rendering
+		std::string mApplicationName;
+		Vec2 mScreenSize;
+		Color mClearColor = RAYWHITE;
+	}; // class Application
+} // namespace Mistral

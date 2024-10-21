@@ -1,50 +1,87 @@
 #include "ResourcesManager.h"
 
-#include <iostream>
+static std::map<std::filesystem::path, Mistral::Resources::Type, std::less<>> mResources;
 
-#include "raylib-cpp.hpp"
-#include "Resources/ResourceTexture.h"
-
-bool ResourcesManager::Load(const std::filesystem::path& Path)
+static bool FileIsSupported(const std::filesystem::path& path, const std::vector<std::string>& extensions)
 {
-	bool Ready = false;
-
-	if (Path.extension() == ".jpg" || Path.extension() == ".png")
+	for (const auto& extension : extensions)
 	{
-		auto Texture = std::make_shared<ResourceTexture>(Path);
-		if (Texture->Get().IsReady())
+		if (path.extension() == extension)
 		{
-			mResources.try_emplace(Path, Texture);
-			Ready = true;
+			return true;
 		}
 	}
 
-	if (!Ready)
+	return false;
+}
+
+bool Mistral::Resources::Load(const std::filesystem::path& path)
+{
+	auto fullPath = ("resources" / path).string().c_str();
+
+	if (!std::filesystem::exists(fullPath))
 	{
-		std::cout << "Could not load the resource: " << Path.filename() << std::endl;
 		return false;
 	}
 
-	return true;
-}
-
-bool ResourcesManager::Unload(const std::filesystem::path& Path)
-{
-	mResources.erase(Path);
-	return true;
-}
-
-std::shared_ptr<Resource> ResourcesManager::Get(const std::filesystem::path& Path)
-{
-	if (mResources.find(Path) == mResources.cend())
+	Type resource;
+	if (FileIsSupported(path, {".png", ".bmp", ".tga", ".jpg", ".gif", ".qoi", ".psd", ".dds", ".hdr", ".ktx", ".astc", ".pkm", ".pvr"}))
 	{
-		bool Status = Load(Path);
+		resource.texture = LoadTexture(fullPath);
+	}
+	else if (FileIsSupported(path, {".wav", ".ogg", ".mp3", ".flac", ".xm", ".mod", ".qoa"}))
+	{
+		resource.sound = LoadSound(fullPath);
+	}
+	else if (FileIsSupported(path, {".obj", ".iqm", ".gltf", ".vox", ".m3d"}))
+	{
+		resource.model = LoadModel(fullPath);
+	}
+	else if (FileIsSupported(path, {".ttf", ".otf"}))
+	{
+		resource.font = LoadFont(fullPath);
+	}
+	mResources.emplace(path, resource);
 
-		if (!Status)
+	return true;
+}
+
+bool Mistral::Resources::Unload(const std::filesystem::path& path)
+{
+	mResources.erase(path);
+	return true;
+}
+
+Mistral::Resources::Type& Mistral::Resources::Get(const std::filesystem::path& path)
+{
+	if (mResources.find(path) == mResources.cend())
+	{
+		if (!Load(path))
 		{
-			std::cout << "Could not get the resource: " << Path.filename() << std::endl;
+			std::cout << "Could not get the resource: " << path.filename() << std::endl;
+			// TODO error handling of unexistent resources
 		}
 	}
 
-	return mResources.at(Path);
+	return mResources.at(path);
+}
+
+Texture& Mistral::Resources::GetTexture(const std::filesystem::path& path)
+{
+	return Get(path).texture;
+}
+
+Sound& Mistral::Resources::GetSound(const std::filesystem::path& path)
+{
+	return Get(path).sound;
+}
+
+Model& Mistral::Resources::GetModel(const std::filesystem::path& path)
+{
+	return Get(path).model;
+}
+
+Font& Mistral::Resources::GetFont(const std::filesystem::path& path)
+{
+	return Get(path).font;
 }

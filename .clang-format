@@ -50,14 +50,14 @@ BreakBeforeTernaryOperators: true
 BreakConstructorInitializers: AfterColon
 BreakInheritanceList: AfterComma
 BreakStringLiterals: true
-ColumnLimit: 120
+ColumnLimit: 150
 CompactNamespaces: false
 ContinuationIndentWidth: 4
 Cpp11BracedListStyle: true
 DerivePointerAlignment: false
 EmptyLineAfterAccessModifier: Always
 EmptyLineBeforeAccessModifier: Always
-FixNamespaceComments: true
+FixNamespaceComments: false
 IncludeBlocks: Regroup
 IncludeCategories:
   - Regex:           '^<ext/.*\.h>'

@@ -1,51 +1,52 @@
-#ifndef COMPONENT_H
-#define COMPONENT_H
+#pragma once
 
 #include <string>
 #include <vector>
 
+#include "Mistral.h"
 #include "raylib-cpp.hpp"
 
-class Component
+namespace Mistral
 {
-  public:
+	class Component
+	{
+	  public:
 
-	Component();
+		Component();
 
-	Component(const std::string& Type);
+		Component(const std::string& Type);
 
-	// Getters
-	std::string GetId() const;
+		// Getters
+		std::string GetId() const;
 
-	Component* GetParent();
+		Component* GetParent();
 
-	std::vector<Component*>& GetChildren();
+		std::vector<Component*>& GetChildren();
 
-	Component* GetChild(const std::string& childId);
+		Component* GetChild(const std::string& childId);
 
-	void SetPosition(raylib::Vector3 position);
+		void SetPosition(Vec3 position);
 
-	raylib::Vector3 GetPosition();
+		Vec3 GetPosition();
 
-	// Events
-	virtual void CreateEvent() {};
+		// Events
+		virtual void CreateEvent() {};
 
-	virtual void DestroyEvent() {};
+		virtual void DestroyEvent() {};
 
-	virtual void UpdateEvent() {};
+		virtual void UpdateEvent() {};
 
-	virtual void FixedUpdateEvent() {};
+		virtual void FixedUpdateEvent() {};
 
-	virtual void RenderEvent() {};
+		virtual void RenderEvent() {};
 
-	virtual void RenderScreenEvent() {};
+		virtual void RenderScreenEvent() {};
 
-  protected:
+	  protected:
 
-	std::string mId;
-	Component* mParent;
-	std::vector<Component*> mChildren;
-	raylib::Vector3 mPosition;
-};
-
-#endif // COMPONENT_H
+		std::string mId;
+		Component* mParent;
+		std::vector<Component*> mChildren;
+		Vec3 mPosition;
+	};
+}
