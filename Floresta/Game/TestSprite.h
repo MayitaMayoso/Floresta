@@ -1,9 +1,8 @@
 #pragma once
 
-#include "Component.h"
-#include "Mistral.h"
+#include "Components/Component.h"
 
-class ComponentSprite : public Mistral::Component
+class TestSprite : public Mistral::Component
 {
   public:
 

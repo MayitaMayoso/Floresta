@@ -3,4 +3,6 @@ target_sources(${PROJECT_NAME} PRIVATE
 		ComponentsManager.cpp
 		ResourcesManager.h
 		ResourcesManager.cpp
+		Camera.h
+		Camera.cpp
 )

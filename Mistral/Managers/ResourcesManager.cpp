@@ -1,5 +1,9 @@
 #include "ResourcesManager.h"
 
+#include <filesystem>
+#include <iostream>
+#include <map>
+
 static std::map<std::filesystem::path, Mistral::Resources::Type, std::less<>> mResources;
 
 static bool FileIsSupported(const std::filesystem::path& path, const std::vector<std::string>& extensions)
@@ -33,7 +37,7 @@ bool Mistral::Resources::Load(const std::filesystem::path& path)
 	{
 		resource.sound = LoadSound(fullPath);
 	}
-	else if (FileIsSupported(path, {".obj", ".iqm", ".gltf", ".vox", ".m3d"}))
+	else if (FileIsSupported(path, {".obj", ".iqm", ".gltf", ".vox", ".m3d", ".glb"}))
 	{
 		resource.model = LoadModel(fullPath);
 	}

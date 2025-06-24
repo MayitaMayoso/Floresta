@@ -1,5 +1,8 @@
 #include "ComponentsManager.h"
 
+#include <map>
+#include <vector>
+
 #include "Components/Component.h"
 
 static std::map<std::string, std::shared_ptr<Mistral::Component>, std::less<>> mComponents;

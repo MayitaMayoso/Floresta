@@ -1,12 +1,12 @@
 #include "Mistral.h"
 
-#include "Components/ComponentSprite.h"
+#include "Managers/Camera.h"
 #include "Managers/ComponentsManager.h"
 
-void Mistral::StartApplication(const std::string& applicationName, const Vec2& screenSize)
+void Mistral::StartApplication(const std::string& applicationName, const Vec2& screenSize, std::function<void()> initFunction)
 {
-	Application app("test", Vec2(1920.f, 1080.f));
-	app.Start();
+	Application app(applicationName, screenSize);
+	app.Start(initFunction);
 }
 
 Mistral::Application::Application(const std::string& applicationName, const Vec2& screenSize):
@@ -21,11 +21,14 @@ Mistral::Application::~Application()
 {
 }
 
-void Mistral::Application::Start()
+void Mistral::Application::Start(std::function<void()> initFunction)
 {
 	raylib::Window window(static_cast<int>(mScreenSize.x), static_cast<int>(mScreenSize.y), mApplicationName);
 
-	Components::Create(std::make_shared<ComponentSprite>());
+	if (initFunction)
+	{
+		initFunction();
+	}
 
 	while (!window.ShouldClose())
 	{
@@ -52,7 +55,11 @@ void Mistral::Application::RenderEvent()
 
 	ClearBackground(mClearColor);
 
+	BeginMode3D(CameraManager::camera);
+
 	Components::RenderEventCallback();
+
+	EndMode3D();
 
 	Components::RenderScreenEventCallback();
 

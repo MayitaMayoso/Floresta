@@ -1,6 +1,5 @@
 #include "Component.h"
 
-#include <iostream>
 #include <random>
 #include <sstream>
 

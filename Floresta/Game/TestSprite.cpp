@@ -1,15 +1,14 @@
-#include "ComponentSprite.h"
-
 #include <iostream>
 
 #include "Managers/ResourcesManager.h"
 #include "Mistral.h"
+#include "TestSprite.h"
 
-void ComponentSprite::CreateEvent()
+void TestSprite::CreateEvent()
 {
 }
 
-void ComponentSprite::UpdateEvent()
+void TestSprite::UpdateEvent()
 {
 	auto Dir = Vec2(raylib::Keyboard::IsKeyDown(KEY_D) - raylib::Keyboard::IsKeyDown(KEY_A),
 					raylib::Keyboard::IsKeyDown(KEY_S) - raylib::Keyboard::IsKeyDown(KEY_W));
@@ -19,7 +18,7 @@ void ComponentSprite::UpdateEvent()
 	mPosition.y += mSpeed.y;
 }
 
-void ComponentSprite::RenderEvent()
+void TestSprite::RenderEvent()
 {
 	auto Sprite = Mistral::Resources::GetTexture("pikachu.png");
 	DrawTexture(Sprite, mPosition.x, mPosition.y, WHITE);

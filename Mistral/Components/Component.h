@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "Mistral.h"
-#include "raylib-cpp.hpp"
 
 namespace Mistral
 {

@@ -1,12 +1,15 @@
 #pragma once
 
-#include <map>
 #include <memory>
 
-#include "Components/Component.h"
+namespace Mistral
+{
+	class Component;
+}
 
 namespace Mistral::Components
 {
+
 	// Components management
 	void Create(std::shared_ptr<Component> component);
 

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <functional>
+
 #include "raylib-cpp.hpp"
 
 using Vec2 = raylib::Vector2;
@@ -10,7 +12,7 @@ using Quat = raylib::Quaternion;
 
 namespace Mistral
 {
-	void StartApplication(const std::string& applicationName, const Vec2& screenSize);
+	void StartApplication(const std::string& applicationName, const Vec2& screenSize, std::function<void()> initFunction = nullptr);
 
 	class Application
 	{
@@ -20,7 +22,7 @@ namespace Mistral
 
 		~Application();
 
-		void Start();
+		void Start(std::function<void()> initFunction = nullptr);
 
 	  private:
 
