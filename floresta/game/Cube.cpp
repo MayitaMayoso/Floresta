@@ -47,4 +47,6 @@ void Cube::RenderScreenEvent()
 			showMessageBox = false;
 		}
 	}
+
+	ImGui::ShowDemoWindow();
 }

@@ -14,7 +14,6 @@ Mistral::Application::Application(const std::string& applicationName, const Vec2
 	mScreenSize(screenSize)
 {
 	SetTraceLogLevel(TraceLogLevel::LOG_NONE);
-	SetTargetFPS(165);
 }
 
 Mistral::Application::~Application()
@@ -23,21 +22,24 @@ Mistral::Application::~Application()
 
 void Mistral::Application::Start(std::function<void()> initFunction)
 {
-	raylib::Window window(static_cast<int>(mScreenSize.x), static_cast<int>(mScreenSize.y), mApplicationName);
+	SetConfigFlags(FLAG_MSAA_4X_HINT | FLAG_VSYNC_HINT | FLAG_WINDOW_RESIZABLE);
+	InitWindow(static_cast<int>(mScreenSize.x), static_cast<int>(mScreenSize.y), mApplicationName.c_str());
+	SetTargetFPS(165);
+	rlImGuiSetup(true);
 
 	if (initFunction)
 	{
 		initFunction();
 	}
 
-	while (!window.ShouldClose())
+	while (!WindowShouldClose())
 	{
 		UpdateEvent();
 
 		RenderEvent();
 	}
 
-	window.Close();
+	CloseWindow();
 }
 
 void Mistral::Application::UpdateEvent()
@@ -61,7 +63,11 @@ void Mistral::Application::RenderEvent()
 
 	EndMode3D();
 
+	rlImGuiBegin();
+
 	EntitiesRenderScreenEventCallback();
+
+	rlImGuiEnd();
 
 	EndDrawing();
 }

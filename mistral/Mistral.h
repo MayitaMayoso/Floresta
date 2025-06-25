@@ -3,6 +3,8 @@
 #include <functional>
 
 #include "raylib-cpp.hpp"
+#include "imgui.h"
+#include "rlImGui.h"
 
 using Vec2 = raylib::Vector2;
 using Vec3 = raylib::Vector3;

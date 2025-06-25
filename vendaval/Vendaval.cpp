@@ -2,20 +2,18 @@
 
 void Vendaval::CreateEvent()
 {
-	Entity::CreateEvent();
 }
 
 void Vendaval::UpdateEvent()
 {
-	Entity::UpdateEvent();
 }
 
 void Vendaval::RenderEvent()
 {
-	Entity::RenderEvent();
 }
 
 void Vendaval::RenderScreenEvent()
 {
-	Entity::RenderScreenEvent();
+	ImGui::ShowDemoWindow();
+	DrawCircle(GetMousePosition().x, GetMousePosition().y, 10.f, RED);
 }
