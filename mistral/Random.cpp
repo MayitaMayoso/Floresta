@@ -3,40 +3,50 @@
 #include <random>
 #include <sstream>
 
-static std::random_device rd;
-static std::mt19937 gen(rd());
-static std::uniform_int_distribution<> dis(0, 15);
-static std::uniform_int_distribution<> dis2(8, 11);
+static std::random_device randomDevice;
+static std::mt19937 randomGenerator(randomDevice());
+static std::uniform_int_distribution hexDigitDistribution(0, 15);
+static std::uniform_int_distribution variantDistribution(8, 11);
 
 std::string GenerateUUID()
 {
-	std::stringstream ss;
-	int i;
-	ss << std::hex;
-	for (i = 0; i < 8; i++)
+	std::stringstream uuidStream;
+	uuidStream << std::hex;
+
+	for (int index = 0; index < 8; index++)
 	{
-		ss << dis(gen);
+		uuidStream << hexDigitDistribution(randomGenerator);
 	}
-	ss << "-";
-	for (i = 0; i < 4; i++)
+
+	uuidStream << "-";
+
+	for (int index = 0; index < 4; index++)
 	{
-		ss << dis(gen);
+		uuidStream << hexDigitDistribution(randomGenerator);
 	}
-	ss << "-4";
-	for (i = 0; i < 3; i++)
+
+	uuidStream << "4";
+
+	for (int index = 0; index < 3; index++)
 	{
-		ss << dis(gen);
+		uuidStream << hexDigitDistribution(randomGenerator);
 	}
-	ss << "-";
-	ss << dis2(gen);
-	for (i = 0; i < 3; i++)
+
+	uuidStream << "-";
+
+	uuidStream << variantDistribution(randomGenerator);
+
+	for (int index = 0; index < 3; index++)
 	{
-		ss << dis(gen);
+		uuidStream << hexDigitDistribution(randomGenerator);
 	}
-	ss << "-";
-	for (i = 0; i < 12; i++)
+
+	uuidStream << "-";
+
+	for (int index = 0; index < 12; index++)
 	{
-		ss << dis(gen);
+		uuidStream << hexDigitDistribution(randomGenerator);
 	}
-	return ss.str();
+
+	return uuidStream.str();
 }

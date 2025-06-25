@@ -1,8 +1,8 @@
 project(mistral)
 
-add_library(${PROJECT_NAME} STATIC)
+add_library(${PROJECT_NAME}_lib STATIC)
 
-target_sources(${PROJECT_NAME} PRIVATE
+target_sources(${PROJECT_NAME}_lib PRIVATE
 		Mistral.h
 		Mistral.cpp
 		Entity.h
@@ -15,8 +15,6 @@ target_sources(${PROJECT_NAME} PRIVATE
 		Random.cpp
 )
 
-target_include_directories(${PROJECT_NAME} PUBLIC
-		${CMAKE_CURRENT_SOURCE_DIR}
-)
+target_include_directories(${PROJECT_NAME}_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 include(Dependencies.cmake)

@@ -26,6 +26,6 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(raygui)
 
 # Add include path only, no library to link
-target_include_directories(${PROJECT_NAME} PUBLIC ${raygui_SOURCE_DIR}/src)
+target_include_directories(${PROJECT_NAME}_lib PUBLIC ${raygui_SOURCE_DIR}/src)
 
-target_link_libraries(${PROJECT_NAME} PUBLIC raylib raylib_cpp)
+target_link_libraries(${PROJECT_NAME}_lib PUBLIC raylib raylib_cpp)

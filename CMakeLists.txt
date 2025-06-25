@@ -3,3 +3,4 @@ project(floresta_project)
 
 add_subdirectory(mistral)
 add_subdirectory(floresta)
+add_subdirectory(vendaval)
