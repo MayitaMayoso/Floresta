@@ -10,6 +10,11 @@ using Vec4 = raylib::Vector4;
 using Mat = raylib::Matrix;
 using Quat = raylib::Quaternion;
 
+#include "Camera.h"
+#include "Entity.h"
+#include "Random.h"
+#include "Resources.h"
+
 namespace Mistral
 {
 	void StartApplication(const std::string& applicationName, const Vec2& screenSize, std::function<void()> initFunction = nullptr);

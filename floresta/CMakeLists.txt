@@ -1,24 +1,23 @@
-project(Floresta)
+project(floresta)
 
+# Game project and files that compound it
 add_executable(${PROJECT_NAME})
-add_library(Game STATIC)
 
-set(TARGETS ${PROJECT_NAME} Game)
-
-foreach (TARGET IN LISTS TARGETS)
-	target_sources(${TARGET} PRIVATE
-			main.cpp
-	)
-endforeach ()
-
-target_include_directories(${PROJECT_NAME} PUBLIC
-		${CMAKE_CURRENT_SOURCE_DIR}
-		${CMAKE_CURRENT_SOURCE_DIR}/../Mistral
+target_sources(${PROJECT_NAME} PRIVATE
+		main.cpp
 )
 
-target_link_libraries(${PROJECT_NAME} PUBLIC raylib raylib_cpp Mistral)
+add_subdirectory(game)
 
+# Dependencies and headers
+target_include_directories(${PROJECT_NAME} PUBLIC
+		${CMAKE_CURRENT_SOURCE_DIR}
+		${mistral_SOURCE_DIR}
+)
 
+target_link_libraries(${PROJECT_NAME} PUBLIC mistral)
+
+# Copy resources directory into build path
 set(OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/resources")
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
@@ -26,5 +25,3 @@ add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
 		${CMAKE_SOURCE_DIR}/Floresta/resources
 		${OUTPUT_DIRECTORY}
 )
-
-add_subdirectory(Game)

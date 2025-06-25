@@ -2,8 +2,7 @@
 
 #include <iostream>
 
-#include "Managers/Camera.h"
-#include "Managers/ResourcesManager.h"
+#include "raygui.h"
 
 void Cube::CreateEvent()
 {
@@ -25,8 +24,27 @@ void Cube::UpdateEvent()
 
 void Cube::RenderEvent()
 {
-	const auto Model = Mistral::Resources::GetModel("Cube.glb");
+	const auto Model = Mistral::GetModel("Cube.glb");
 	DrawModel(Model, mPosition, 1.f, WHITE);
 	Mistral::CameraManager::camera.position = mPosition + Vec3(cos(mRotation), 0.f, sin(mRotation)) * 20.f + Vec3(0.f, 10.f, 0.f);
 	mRotation += 2.f * PI / 300.f;
+}
+
+void Cube::RenderScreenEvent()
+{
+	static bool showMessageBox = false;
+	if (GuiButton({24, 24, 120, 30}, "#191#Show Message"))
+	{
+		showMessageBox = true;
+	}
+
+	if (showMessageBox)
+	{
+		int result = GuiMessageBox({85, 70, 250, 100}, "#191#Message Box", "Hi! This is a message!", "Nice;Cool");
+
+		if (result >= 0)
+		{
+			showMessageBox = false;
+		}
+	}
 }

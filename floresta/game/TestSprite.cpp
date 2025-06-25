@@ -1,7 +1,3 @@
-#include <iostream>
-
-#include "Managers/ResourcesManager.h"
-#include "Mistral.h"
 #include "TestSprite.h"
 
 void TestSprite::CreateEvent()
@@ -20,6 +16,6 @@ void TestSprite::UpdateEvent()
 
 void TestSprite::RenderEvent()
 {
-	auto Sprite = Mistral::Resources::GetTexture("pikachu.png");
+	auto Sprite = Mistral::GetTexture("pikachu.png");
 	DrawTexture(Sprite, mPosition.x, mPosition.y, WHITE);
 }

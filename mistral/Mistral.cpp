@@ -1,7 +1,7 @@
 #include "Mistral.h"
 
-#include "Managers/Camera.h"
-#include "Managers/ComponentsManager.h"
+#define RAYGUI_IMPLEMENTATION
+#include "raygui.h"
 
 void Mistral::StartApplication(const std::string& applicationName, const Vec2& screenSize, std::function<void()> initFunction)
 {
@@ -42,11 +42,11 @@ void Mistral::Application::Start(std::function<void()> initFunction)
 
 void Mistral::Application::UpdateEvent()
 {
-	Components::CreateEventCallback();
+	EntitiesCreateEventCallback();
 
-	Components::DestroyEventCallback();
+	EntitiesDestroyEventCallback();
 
-	Components::UpdateEventCallback();
+	EntitiesUpdateEventCallback();
 }
 
 void Mistral::Application::RenderEvent()
@@ -57,11 +57,11 @@ void Mistral::Application::RenderEvent()
 
 	BeginMode3D(CameraManager::camera);
 
-	Components::RenderEventCallback();
+	EntitiesRenderEventCallback();
 
 	EndMode3D();
 
-	Components::RenderScreenEventCallback();
+	EntitiesRenderScreenEventCallback();
 
 	EndDrawing();
 }

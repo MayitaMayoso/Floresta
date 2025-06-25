@@ -4,9 +4,9 @@
 
 #include "Mistral.h"
 
-namespace Mistral::Resources
+namespace Mistral
 {
-	union Type
+	union Resource
 	{
 		Texture texture;
 		Sound sound;
@@ -14,11 +14,11 @@ namespace Mistral::Resources
 		Font font;
 	};
 
-	bool Load(const std::filesystem::path& path);
+	bool ResourceLoad(const std::filesystem::path& path);
 
-	bool Unload(const std::filesystem::path& path);
+	bool ResourceUnload(const std::filesystem::path& path);
 
-	Type& Get(const std::filesystem::path& path);
+	Resource& ResourceGet(const std::filesystem::path& path);
 
 	Texture& GetTexture(const std::filesystem::path& path);
 

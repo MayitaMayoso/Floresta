@@ -1,36 +1,5 @@
-cmake_minimum_required(VERSION 3.14)
-project(FlorestaProject)
+cmake_minimum_required(VERSION 3.16)
+project(floresta_project)
 
-# raylib
-find_package(raylib QUIET)
-if (NOT raylib_FOUND)
-	include(FetchContent)
-	FetchContent_Declare(
-			raylib
-			GIT_REPOSITORY https://github.com/raysan5/raylib.git
-			GIT_TAG 5.0
-			GIT_SHALLOW 1
-	)
-	FetchContent_MakeAvailable(raylib)
-endif ()
-
-# raylib-cpp
-find_package(raylib_cpp QUIET)
-if (NOT raylib_cpp_FOUND)
-	if (NOT DEFINED RAYLIB_CPP_VERSION)
-		set(RAYLIB_CPP_VERSION v5.0.2)
-	endif ()
-	include(FetchContent)
-	FetchContent_Declare(
-			raylib_cpp
-			GIT_TAG ${RAYLIB_CPP_VERSION}
-			GIT_REPOSITORY https://github.com/RobLoach/raylib-cpp.git
-	)
-	FetchContent_MakeAvailable(raylib_cpp)
-endif ()
-
-
-# Project subdirectories
-add_subdirectory(Mistral)
-add_subdirectory(Floresta)
-add_subdirectory(Vendaval)
+add_subdirectory(mistral)
+add_subdirectory(floresta)
